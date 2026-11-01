@@ -129,7 +129,7 @@ satir("Güvenlik","Elektriksel müdahale ve soğutucu akışkan işlemleri yetki
 satir("Durum","Bu sonuç otomatik kural tabanlı ön değerlendirmedir; yapay zekâ teşhisi değildir.");
 } 
   
-fetch("arizalar.json")
+fetch("arizalar.json?v=02")
   .then(yanit => {
     if (!yanit.ok) throw new Error("Dosya okunamadı");
     return yanit.json();
