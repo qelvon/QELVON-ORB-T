@@ -1,36 +1,38 @@
 
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>QELVON ORBIT</title>
+<title>QELVON ORBIT 0.2</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1220;color:#f8fafc;font-family:Arial,sans-serif}
-header{padding:28px 18px;text-align:center;background:#111e35}
-h1{margin:0;color:#38bdf8;letter-spacing:2px}
-header p{color:#94a3b8}
-main{max-width:600px;margin:auto;padding:20px}
-.card{background:#17243a;padding:22px;border-radius:18px;margin-bottom:18px}
-label{display:block;margin:16px 0 8px}
-select,input,button{width:100%;padding:14px;border-radius:10px;font-size:16px}
-select,input{background:#0b1220;color:white;border:1px solid #475569}
-button{margin-top:20px;border:0;background:#0ea5e9;color:white;font-weight:bold;cursor:pointer}
-#sonuc{display:none;line-height:1.6}
-small{color:#94a3b8}
+body{margin:0;background:#090f1d;color:#f1f5f9;font-family:Arial,sans-serif}
+header{text-align:center;padding:32px 15px;background:#142039}
+h1{color:#38bdf8;letter-spacing:2px;margin:8px 0}
+header p,.muted{color:#94a3b8}
+main{max-width:650px;margin:auto;padding:16px}
+.card{background:#19263d;border:1px solid #293b57;border-radius:18px;padding:22px;margin:16px 0}
+h2{font-size:21px}
+label{display:block;margin:18px 0 8px}
+select,input,textarea{width:100%;padding:14px;background:#0b1425;color:white;border:1px solid #475569;border-radius:10px;font-size:16px}
+textarea{min-height:90px}
+button{width:100%;padding:15px;margin-top:20px;border:0;border-radius:11px;background:#0ea5e9;color:white;font-size:17px;font-weight:bold}
+.result{display:none;line-height:1.7;border-left:4px solid #38bdf8}
+.tag{display:inline-block;background:#123b54;color:#7dd3fc;padding:7px 11px;border-radius:20px;font-size:13px}
+footer{text-align:center;padding:25px;color:#94a3b8;font-size:13px}
 </style>
 </head>
 <body>
 <header>
+<div class="tag">PROTOTİP V0.2</div>
 <h1>QELVON ORBIT</h1>
-<p>Akıllı Cihaz Arıza Teşhis Sistemi</p>
+<p>Akıllı Cihaz Arıza Teşhis Platformu</p>
 </header>
 <main>
-<section class="card">
-<h2>Klima Arıza Sorgulama</h2>
-<label for="marka">Klima markası</label>
+<div class="card">
+<h2>Klima Arıza Teşhisi</h2>
+<label for="marka">Cihaz markası</label>
 <select id="marka">
 <option value="">Marka seçiniz</option>
 <option>Arçelik</option>
@@ -42,30 +44,89 @@ small{color:#94a3b8}
 <option>Hantech</option>
 <option>Carrier</option>
 </select>
+<label for="model">Model numarası</label>
+<input id="model" placeholder="Cihaz modelini yazın">
 <label for="kod">Arıza kodu</label>
-<input id="kod" placeholder="Örneğin: CH38">
-<button onclick="teshis()">Arızayı Sorgula</button>
-</section>
-<section class="card" id="sonuc" aria-live="polite"></section>
-<p><small>Prototip sürüm 0.1 — Sonuçlar kesin teşhis değildir. Elektrik ve soğutucu akışkan işlemleri yetkili uzman tarafından yapılmalıdır.</small></p>
+<input id="kod" placeholder="Örneğin CH38">
+<label for="belirti">Arıza belirtisi</label>
+<select id="belirti">
+<option value="">Belirti seçiniz</option>
+<option>Soğutmuyor</option>
+<option>Isıtmıyor</option>
+<option>İç fan çalışmıyor</option>
+<option>Dış ünite çalışmıyor</option>
+<option>Su akıtıyor</option>
+<option>Ses yapıyor</option>
+<option>Elektrik gelmiyor</option>
+<option>Sürekli durup çalışıyor</option>
+</select>
+<label for="not">Ek açıklama (isteğe bağlı)</label>
+<textarea id="not" placeholder="Cihazın davranışını yazın"></textarea>
+<button onclick="teshis()">Arızayı Analiz Et</button>
+</div>
+<div id="sonuc" class="card result" aria-live="polite"></div>
+<div class="card">
+<h2>Teknik Servis Bilgilendirmesi</h2>
+<p class="muted">Arıza kodları marka ve modele göre değişebilir. Bu prototip kesin teşhis vermez. Servis dokümanı doğrulaması gereklidir.</p>
+</div>
 </main>
+<footer>QELVON ORBIT © 2026 | Prototip 0.2</footer>
 <script>
-const veriler={
-"LG|CH38":"Soğutucu akışkan eksikliğiyle ilişkili koruma uyarısı olabilir. Modelin servis dokümanından doğrulayın.",
-"Baymak|E5":"Arıza kodunun anlamı modele göre değişebilir. Model numarası ve servis dokümanı gereklidir."
+const kayitlar={
+"LG|CH38":{
+anlam:"Soğutucu akışkan eksikliğiyle ilişkili koruma uyarısı olabilir.",
+kontrol:"Cihazın tam modelini ve üreticinin servis açıklamasını doğrulayın."
+}
+};
+const belirtiler={
+"Soğutmuyor":"Filtre, hava akışı, çalışma modu ve dış ünite davranışı kontrol edilmelidir.",
+"Isıtmıyor":"Çalışma modu, ayar sıcaklığı ve dış ortam koşulları kontrol edilmelidir.",
+"İç fan çalışmıyor":"Fan çalışma modu, kumanda ayarları ve cihazın hata göstergeleri kontrol edilmelidir.",
+"Dış ünite çalışmıyor":"Çalışma talebi, bekleme süresi ve cihazın hata göstergeleri incelenmelidir.",
+"Su akıtıyor":"Drenaj hattında tıkanma ve yoğuşma suyu taşması ihtimali incelenmelidir.",
+"Ses yapıyor":"Sesin kaynağı ve titreşim durumu gözlemlenmelidir.",
+"Elektrik gelmiyor":"Güç kaynağı ve koruma elemanları yetkili kişi tarafından kontrol edilmelidir.",
+"Sürekli durup çalışıyor":"Sıcaklık ayarları, hava akışı ve koruma uyarıları incelenmelidir."
 };
 function teshis(){
 const marka=document.getElementById("marka").value;
+const model=document.getElementById("model").value.trim();
 const kod=document.getElementById("kod").value.trim().toUpperCase();
+const belirti=document.getElementById("belirti").value;
 const sonuc=document.getElementById("sonuc");
 sonuc.style.display="block";
-if(!marka||!kod){
-sonuc.textContent="Lütfen marka ve arıza kodunu girin.";
+sonuc.replaceChildren();
+function satir(baslik,icerik){
+const p=document.createElement("p");
+const b=document.createElement("strong");
+b.textContent=baslik+": ";
+p.append(b,document.createTextNode(icerik));
+sonuc.appendChild(p);
+}
+if(!marka){
+satir("Uyarı","Lütfen marka seçiniz.");
 return;
 }
-const aciklama=veriler[marka+"|"+kod]||
-"Bu marka ve kod için henüz doğrulanmış bilgi eklenmedi. Model numarası ve servis kılavuzu gereklidir.";
-sonuc.textContent=marka+" — "+kod+": "+aciklama;
+if(!kod&&!belirti){
+satir("Uyarı","Arıza kodu veya belirti giriniz.");
+return;
+}
+const kayit=kayitlar[marka+"|"+kod];
+satir("Marka",marka);
+satir("Model",model||"Belirtilmedi");
+if(kod){
+satir("Arıza kodu",kod);
+satir("Kod açıklaması",kayit?
+kayit.anlam:
+"Bu marka ve kod için doğrulanmış kayıt henüz bulunmuyor.");
+}
+if(kayit)satir("İlk kontrol",kayit.kontrol);
+if(belirti){
+satir("Belirti",belirti);
+satir("Genel ön kontrol",belirtiler[belirti]);
+}
+satir("Güvenlik","Elektriksel müdahale ve soğutucu akışkan işlemleri yetkili uzman tarafından yapılmalıdır.");
+satir("Durum","Bu sonuç otomatik kural tabanlı ön değerlendirmedir; yapay zekâ teşhisi değildir.");
 }
 </script>
 </body>
