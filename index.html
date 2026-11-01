@@ -1,1 +1,73 @@
 
+HTML
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QELVON ORBIT</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1220;color:#f8fafc;font-family:Arial,sans-serif}
+header{padding:28px 18px;text-align:center;background:#111e35}
+h1{margin:0;color:#38bdf8;letter-spacing:2px}
+header p{color:#94a3b8}
+main{max-width:600px;margin:auto;padding:20px}
+.card{background:#17243a;padding:22px;border-radius:18px;margin-bottom:18px}
+label{display:block;margin:16px 0 8px}
+select,input,button{width:100%;padding:14px;border-radius:10px;font-size:16px}
+select,input{background:#0b1220;color:white;border:1px solid #475569}
+button{margin-top:20px;border:0;background:#0ea5e9;color:white;font-weight:bold;cursor:pointer}
+#sonuc{display:none;line-height:1.6}
+small{color:#94a3b8}
+</style>
+</head>
+<body>
+<header>
+<h1>QELVON ORBIT</h1>
+<p>Akıllı Cihaz Arıza Teşhis Sistemi</p>
+</header>
+<main>
+<section class="card">
+<h2>Klima Arıza Sorgulama</h2>
+<label for="marka">Klima markası</label>
+<select id="marka">
+<option value="">Marka seçiniz</option>
+<option>Arçelik</option>
+<option>LG</option>
+<option>GREE</option>
+<option>Mitsubishi</option>
+<option>Baymak</option>
+<option>Airfel</option>
+<option>Hantech</option>
+<option>Carrier</option>
+</select>
+<label for="kod">Arıza kodu</label>
+<input id="kod" placeholder="Örneğin: CH38">
+<button onclick="teshis()">Arızayı Sorgula</button>
+</section>
+<section class="card" id="sonuc" aria-live="polite"></section>
+<p><small>Prototip sürüm 0.1 — Sonuçlar kesin teşhis değildir. Elektrik ve soğutucu akışkan işlemleri yetkili uzman tarafından yapılmalıdır.</small></p>
+</main>
+<script>
+const veriler={
+"LG|CH38":"Soğutucu akışkan eksikliğiyle ilişkili koruma uyarısı olabilir. Modelin servis dokümanından doğrulayın.",
+"Baymak|E5":"Arıza kodunun anlamı modele göre değişebilir. Model numarası ve servis dokümanı gereklidir."
+};
+function teshis(){
+const marka=document.getElementById("marka").value;
+const kod=document.getElementById("kod").value.trim().toUpperCase();
+const sonuc=document.getElementById("sonuc");
+sonuc.style.display="block";
+if(!marka||!kod){
+sonuc.textContent="Lütfen marka ve arıza kodunu girin.";
+return;
+}
+const aciklama=veriler[marka+"|"+kod]||
+"Bu marka ve kod için henüz doğrulanmış bilgi eklenmedi. Model numarası ve servis kılavuzu gereklidir.";
+sonuc.textContent=marka+" — "+kod+": "+aciklama;
+}
+</script>
+</body>
+</html>
