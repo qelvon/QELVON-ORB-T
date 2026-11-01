@@ -15,6 +15,15 @@
       "aciklama": "Arıza kodunun anlamı modele göre değişebilir.",
       "ilkKontrol": "Model numarasını ve üretici servis kılavuzunu kontrol edin.",
       "durum": "Model bazında doğrulama gerekli"
-    }
-  ]
+
+    },
+
+  {
+  "marka": "Arçelik",
+  "kod": "E1",
+  "aciklama": "Arıza kodunun anlamı cihaz modeline göre değişebilir.",
+  "ilkKontrol": "Cihazın model numarasını ve üreticinin servis dokümanını kontrol edin.",
+  "durum": "Model bazında doğrulama gerekli"
+}
+]
 }
