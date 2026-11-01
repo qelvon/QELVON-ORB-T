@@ -127,7 +127,23 @@ satir("Genel ön kontrol",belirtiler[belirti]);
 }
 satir("Güvenlik","Elektriksel müdahale ve soğutucu akışkan işlemleri yetkili uzman tarafından yapılmalıdır.");
 satir("Durum","Bu sonuç otomatik kural tabanlı ön değerlendirmedir; yapay zekâ teşhisi değildir.");
-}
+} 
+  
+fetch("arizalar.json")
+  .then(yanit => {
+    if (!yanit.ok) throw new Error("Dosya okunamadı");
+    return yanit.json();
+  })
+  .then(veri => {
+    veri.arizalar.forEach(ariza => {
+      kayitlar[ariza.marka + "|" + ariza.kod] = {
+        anlam: ariza.aciklama,
+        kontrol: ariza.ilkKontrol
+      };
+    });
+  })
+  .catch(hata => console.error("Arıza verileri:", hata));
+
 </script>
 </body>
 </html>
