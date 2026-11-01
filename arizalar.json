@@ -1,6 +1,5 @@
-
 {
-  "surum": "0.1",
+  "surum": "0.2",
   "arizalar": [
     {
       "marka": "LG",
@@ -10,20 +9,46 @@
       "durum": "Model bazında doğrulama gerekli"
     },
     {
+      "marka": "LG",
+      "kod": "CH05",
+      "aciklama": "İç ve dış ünite arasındaki haberleşme sorunuyla ilişkili olabilir.",
+      "ilkKontrol": "Tam modelin servis dokümanını ve haberleşme hata açıklamasını kontrol edin.",
+      "durum": "Model bazında doğrulama gerekli"
+    },
+    {
+      "marka": "LG",
+      "kod": "CH10",
+      "aciklama": "İç ünite fan motoruyla ilişkili bir arıza olabilir.",
+      "ilkKontrol": "Tam modelin servis dokümanından fan arızası açıklamasını doğrulayın.",
+      "durum": "Model bazında doğrulama gerekli"
+    },
+    {
+      "marka": "LG",
+      "kod": "CH21",
+      "aciklama": "İnverter kompresör sürücüsüyle ilişkili koruma hatası olabilir.",
+      "ilkKontrol": "Cihazın tam modeline ait üretici hata kodu tablosunu inceleyin.",
+      "durum": "Model bazında doğrulama gerekli"
+    },
+    {
+      "marka": "LG",
+      "kod": "CH67",
+      "aciklama": "Dış ünite fanıyla ilişkili bir arıza olabilir.",
+      "ilkKontrol": "Modelin servis dokümanından dış fan hata açıklamasını doğrulayın.",
+      "durum": "Model bazında doğrulama gerekli"
+    },
+    {
       "marka": "Baymak",
       "kod": "E5",
       "aciklama": "Arıza kodunun anlamı modele göre değişebilir.",
       "ilkKontrol": "Model numarasını ve üretici servis kılavuzunu kontrol edin.",
       "durum": "Model bazında doğrulama gerekli"
-
     },
-
-  {
-  "marka": "Arçelik",
-  "kod": "E1",
-  "aciklama": "Arıza kodunun anlamı cihaz modeline göre değişebilir.",
-  "ilkKontrol": "Cihazın model numarasını ve üreticinin servis dokümanını kontrol edin.",
-  "durum": "Model bazında doğrulama gerekli"
-}
-]
+    {
+      "marka": "Arçelik",
+      "kod": "E1",
+      "aciklama": "Arıza kodunun anlamı cihaz modeline göre değişebilir.",
+      "ilkKontrol": "Cihazın model numarasını ve üreticinin servis dokümanını kontrol edin.",
+      "durum": "Model bazında doğrulama gerekli"
+    }
+  ]
 }
