@@ -1,0 +1,20 @@
+
+{
+  "surum": "0.1",
+  "arizalar": [
+    {
+      "marka": "LG",
+      "kod": "CH38",
+      "aciklama": "Soğutucu akışkan eksikliğiyle ilişkili koruma uyarısı olabilir.",
+      "ilkKontrol": "Cihazın tam modelini ve üreticinin servis dokümanını doğrulayın.",
+      "durum": "Model bazında doğrulama gerekli"
+    },
+    {
+      "marka": "Baymak",
+      "kod": "E5",
+      "aciklama": "Arıza kodunun anlamı modele göre değişebilir.",
+      "ilkKontrol": "Model numarasını ve üretici servis kılavuzunu kontrol edin.",
+      "durum": "Model bazında doğrulama gerekli"
+    }
+  ]
+}
